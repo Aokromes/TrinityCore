@@ -1,5 +1,6 @@
 delete from `creature` WHERE `id`=47306;
-delete from `creature` WHERE `id`=48267;update `creature` set `id` = '46873' where `guid` = '265986';
+delete from `creature` WHERE `id`=48267;
+/*update `creature` set `id` = '46873' where `guid` = '265986';*/
 insert into `creature` (`id`, `map`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `VerifiedBuild`) values ('44833', '1', '-8920.7', '-2261.42', '8.96093', '5.84685', '300', '15595');
 insert into `creature` (`id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `VerifiedBuild`) values('47306','1','1','1','35541','1','-10929.7','-1505.99','6.75974','0.436332','300','3','0','53681','0','1','0','0','0','15595');
 insert into `creature` (`id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `VerifiedBuild`) values('47306','1','1','1','35542','1','-10784.5','-1401.48','15.4361','1.39626','300','3','0','53681','0','1','0','0','0','15595');
