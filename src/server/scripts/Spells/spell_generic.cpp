@@ -4248,6 +4248,44 @@ class spell_gen_pony_mount_check : public SpellScriptLoader
         }
 };
 
+enum NozdormuTimeLoop
+{
+    SPELL_NOZDORMU_TIMELOOP      = 105984,
+    SPELL_NOZDORMU_TIMELOOP_HEAL = 105992
+};
+class spell_gen_nozdormu_timeloop : public SpellScriptLoader     // 105984
+{
+    public:
+        spell_gen_nozdormu_timeloop() : SpellScriptLoader("spell_gen_nozdormu_timeloop") { }
+
+        class spell_gen_nozdormu_timeloop_AuraScript : public AuraScript
+        {
+            PrepareAuraScript(spell_gen_nozdormu_timeloop_AuraScript);
+
+            void OnAbsorb(AuraEffect* /*aurEff*/, DamageInfo& dmgInfo, uint32& absorbAmount)
+            {
+                if (dmgInfo.GetDamage() >= GetTarget()->GetHealth())
+                {
+                    absorbAmount = dmgInfo.GetDamage();
+                    int32 healAmount = int32(GetTarget->CountPctFromMaxHealth(100));
+                    GetTarget->CastCustomSpell(GetTarget, SPELL_NOZDORMU_TIMELOOP_HEAL, &healAmount, NULL, NULL, true);
+                }
+                else
+                    PreventDefaultAction();
+            }
+
+            void Register() override
+            {
+                OnEffectAbsorb += AuraEffectAbsorbFn(spell_gen_nozdormu_timeloop_AuraScript::OnAbsorb, EFFECT_1);
+            }
+        };
+
+        AuraScript* GetAuraScript() const override
+        {
+            return new spell_gen_nozdormu_timeloop_AuraScript();
+        }
+};
+
 void AddSC_generic_spell_scripts()
 {
     new spell_gen_absorb0_hitlimit1();
@@ -4349,4 +4387,5 @@ void AddSC_generic_spell_scripts()
     new spell_gen_landmine_knockback_achievement();
     new spell_gen_clear_debuffs();
     new spell_gen_pony_mount_check();
+    new spell_gen_nozdormu_timeloop();
 }
